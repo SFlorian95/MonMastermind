@@ -1,0 +1,100 @@
+html, body {
+    width: 100%;
+    font-family: 'Mystery Quest', cursive;
+}
+
+
+html { 
+    margin:0;
+    padding:0;
+    /*background: url(bambou.jpg) no-repeat center fixed;*/ 
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover; /* version standardisÃ©e */
+  }
+
+table {
+    margin: 0 auto;
+}
+
+table, th, td {
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: rgb(101, 60, 167);
+  }
+
+tr {
+    height: 55px;
+}
+
+.numZone {
+    background-color: white;
+}
+
+
+/* Points *************************************************************/
+.bille {
+    height: 40px;
+    width: 40px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.billeSm {
+    height: 15px;
+    width: 15px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.whiteText {
+    color: whitesmoke;
+}
+
+/* cases *************************************************************/
+
+.resultZone {
+    width: 200px;
+    background-color: rgb(80, 78, 78);
+    border-radius: 4px;
+}
+
+.gameZone {
+    width: 500px;
+    background-color: azure;
+    border-radius: 4px;
+}
+
+#nameZone {
+    color: black;
+    font-weight: bold;
+}
+
+#nameZone span {
+    color: darkred;
+    font-weight: bold;
+}
+/* ReplayBtn ****************************************************************/
+
+#replayBtn {
+    background-color: darkred;
+    color: whitesmoke;
+    padding: 12px;
+    /* margin-top: 50px; */
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+/* ValidBtn **************************************************************/
+
+.activeResultZone {
+    background-color: rgb(38, 0, 128);
+    color: whitesmoke;
+    /* padding: 12px; */
+    border-radius: 8px;
+    /* font-size: 10px; */
+}

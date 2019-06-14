@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mastermind</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Mystery+Quest" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.jpg"/>
+</head>
+
+
+<body>
+
+    <table id="masterboard" style="width: 40%">
+        <tr>
+            <td colspan="3" id="nameZone">Master<span>Mind</span></td> 
+        </tr>
+        <tr>
+           <td colspan="2" id="scoreZone"></td>
+           <td id="replayZone"></td>
+        </tr>
+        <tr>
+            <td class="numZone">10</td>
+            <td class="gameZone" id="gameRow10"></td> 
+            <td class="resultZone" id="validBtn10"></td>
+        </tr>
+        <tr>
+            <td class="numZone">9</td>
+            <td class="gameZone" id="gameRow9"></td> 
+            <td class="resultZone" id="validBtn9"></td>
+        </tr>
+        <tr>
+            <td class="numZone">8</td>
+            <td class="gameZone" id="gameRow8"></td> 
+            <td class="resultZone" id="validBtn8"></td>
+        </tr>
+        <tr>
+            <td class="numZone">7</td>
+            <td class="gameZone" id="gameRow7"></td> 
+            <td class="resultZone" id="validBtn7"></td>
+        </tr>
+        <tr>
+            <td class="numZone">6</td>
+            <td class="gameZone" id="gameRow6"></td> 
+            <td class="resultZone" id="validBtn6"></td>
+        </tr>
+        <tr>
+            <td class="numZone">5</td>
+            <td class="gameZone" id="gameRow5"></td> 
+            <td class="resultZone" id="validBtn5"></td>
+        </tr>
+        <tr>
+            <td class="numZone">4</td>
+            <td class="gameZone" id="gameRow4"></td> 
+            <td class="resultZone" id="validBtn4"></td>
+        </tr>
+        <tr>
+            <td class="numZone">3</td>
+            <td class="gameZone" id="gameRow3"></td> 
+            <td class="resultZone" id="validBtn3"></td>
+        </tr>
+        <tr>
+            <td class="numZone">2</td>
+            <td class="gameZone" id="gameRow2"></td> 
+            <td class="resultZone" id="validBtn2"></td>
+        </tr>
+        <tr>
+            <td class="numZone">1</td>
+            <td class="gameZone" id="gameRow1"></td> 
+            <td class="resultZone" id="validBtn1"></td>
+        </tr>
+        <tr>
+            <td colspan="3" id="combiZone"></td> 
+        </tr>
+        <tr>
+            <td colspan="3"  style="text-align:center">
+                <h1 class="whiteText">Couleurs</h1>
+                <div style="text-align:center">
+                    <span class="bille" OnClick="colorLoader(this.id)" id="red" style="background-color: red"></span>
+                    <span class="bille" OnClick="colorLoader(this.id)" id="purple" style="background-color: purple"></span>
+                    <span class="bille" OnClick="colorLoader(this.id)" id="blue" style="background-color: blue"></span>
+                    <span class="bille" OnClick="colorLoader(this.id)" id="pink" style="background-color: pink"></span>
+                    <span class="bille" OnClick="colorLoader(this.id)" id="green" style="background-color: green"></span>
+                    <span class="bille" OnClick="colorLoader(this.id)" id="orange" style="background-color: orange"></span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3"  style="text-align:center">
+                <h1 class="whiteText">Regles</h1>
+                <p class="whiteText">
+                    Cliquez sur une couleur pour la sélectionner, puis cliquez sur une bille grise pour la repeindre!<br>
+                    Un point rouge indique qu'une des billes est bien placée, <br>
+                    un point blanc indique qu'une des billes est de la bonne couleur, mais mal placée, <br>
+                    un point noir indique que la couleur est mauvaise. <br>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    
+
+
+    <!-- <div style="text-align:center">
+        <h1 class="whiteText">Couleurs</h1>
+        <div style="text-align:center">
+            <span class="bille" OnClick="colorLoader(this.id)" id="red" style="background-color: red"></span>
+            <span class="bille" OnClick="colorLoader(this.id)" id="purple" style="background-color: purple"></span>
+            <span class="bille" OnClick="colorLoader(this.id)" id="blue" style="background-color: blue"></span>
+            <span class="bille" OnClick="colorLoader(this.id)" id="pink" style="background-color: pink"></span>
+            <span class="bille" OnClick="colorLoader(this.id)" id="green" style="background-color: green"></span>
+            <span class="bille" OnClick="colorLoader(this.id)" id="orange" style="background-color: orange"></span>
+        </div>
+        <br>
+        <h1 class="whiteText">Regles</h1>
+        <p class="whiteText">
+            Cliquez sur une couleur pour la sélectionner, puis cliquez sur une bille grise pour la repeindre!<br>
+            Un point rouge indique qu'une des billes est bien placée, <br>
+            un point blanc indique qu'une des billes est de la bonne couleur, mais mal placée, <br>
+            un point noir indique que la couleur est mauvaise. <br>
+        </p>
+    </div> -->
+
+    <script>
+// variables générales
+
+        let colorsTable = ["red", "purple", "blue", "pink", "green", "orange", "white", "black"];
+        
+        //let currentColor = "red"; 
+        let result = [];
+        let score = 0;
+        //let solution = ["red", "blue", "green", "orange"]; // pour test
+               
+        
+        let currentTurn = 1; // pour initialiser
+        let combi = [0, 0, 0, 0];
+
+        let hasard = 1; // pour le code secret au hasard
+        let solution = [];
+
+
+// fonctions
+                    
+        function code(hasard) { // création du code secret
+        
+            while (hasard < 5) {
+                couleur = colorsTable[Math.floor((Math.random() * 6))];
+                solution.push(couleur);
+                hasard++;
+            }
+            console.log(solution);
+        }
+
+        function judge(combi, solution) {
+            let i = 0;
+            let redDot = 0;
+            let whiteDot = 0;
+            //console.log(combi); // pour test
+
+            if (combi.includes(0)) {
+                alert("bille vide!"); 
+            } else {
+                for (let i = 0; i < combi.length; i++) {
+                    if (combi[i] == solution[i]) {
+                        redDot++;
+                    } else if (combi[i] != solution[i] && solution.includes(combi[i])) {
+                        whiteDot++;
+                    }
+                }
+                if (redDot == 4) {
+                    result = [redDot, whiteDot];
+                    alert("Gagné !\nVous ramassez " + (11-currentTurn) + " points");
+                    score += (11-currentTurn);
+                    //alert("Vous avez " + score + " points");
+                    document.getElementById("scoreZone").innerHTML = "<strong>Score : " + score + "</strong>";
+                    document.getElementById("validBtn" + currentTurn).outerHTML = '<td class="resultZone"  id="validBtn' + currentTurn + '">' + resultatron(result) + '</td>';
+                    //alert("testco");
+                    document.getElementById("replayZone").innerHTML = '<button type="button" class="replayBtn" id="replayBtn" onclick="replay()">Rejouer</button>';
+                    //alert("resultat");
+                } else {
+                    if (currentTurn < 10) {
+                        result = [redDot, whiteDot];
+                        currentTurn++;
+                        ballEnabler(currentTurn, combi);
+                        combi = [];
+                    } else {
+                        alert("Perdu!");
+                        document.getElementById("replayZone").innerHTML = '<button type="button" id="replayBtn" onclick="replay()">Rejouer</button>';
+                        //alert("truc"); //pour test
+                        document.getElementById("combiZone").innerHTML = '<span class="bille" style="background-color: ' + solution[0] + '"></span><span class="bille" style="background-color: ' + solution[1] + '"></span><span class="bille" style="background-color: ' + solution[2] + '"></span><span class="bille" style="background-color: ' + solution[3] + '"></span>';
+                        //alert("truc"); //pour test
+                    }
+                }
+            } 
+        }
+     
+        function colorLoader(color) {
+            currentColor = color;
+        }
+        
+        function colorSetter(element, id) {
+            element.style.backgroundColor = currentColor;
+            idNum = Number(id)-1;
+            combi[idNum] = currentColor;
+        }
+
+        function resultatron(result) {
+            combi = [0, 0, 0, 0];
+            let a = '<span class="billeSm" style="background-color: red"></span>';
+            let b = '<span class="billeSm" style="background-color: white"></span>';
+            let c = '<span class="billeSm" style="background-color: black"></span>';
+            
+            let i = 0;
+            let x = "";
+
+            for (i = 0; i < result[0]; i++) { 
+                x += a;
+            }
+            for (i = 0; i < result[1]; i++) { 
+                x += b;
+            }
+            for (i = 0; i < (4-result[0]-result[1]); i++) { 
+                x += c;
+            }
+            return x;
+        }
+
+        function ballEnabler(currentTurn, combi) {
+            //alert("test" + currentTurn);
+            if (currentTurn > 1) {
+                document.getElementById("gameRow" + (currentTurn-1)).innerHTML = '<span class="bille" style="background-color: ' + combi[0] + '"></span><span class="bille" style="background-color: ' + combi[1] + '"></span><span class="bille" style="background-color: ' + combi[2] + '"></span><span class="bille" style="background-color: ' + combi[3] + '"></span>';
+                document.getElementById("validBtn" + (currentTurn-1)).outerHTML = '<td class="resultZone"  id="validBtn' + (currentTurn-1) + '">' + resultatron(result) + '</td>';
+            }
+            document.getElementById("gameRow" + currentTurn).innerHTML = '<span class="bille" OnClick="colorSetter(this, id)" id="1"></span><span class="bille" OnClick="colorSetter(this, id)" id="2" ></span><span class="bille" OnClick="colorSetter(this, id)" id="3" ></span><span class="bille" OnClick="colorSetter(this, id)" id="4" ></span>';
+            document.getElementById("validBtn" + currentTurn).outerHTML = '<td class="activeResultZone" id="validBtn' + currentTurn + '" onclick="judge(combi, solution)">Valider</td>';
+        } 
+
+        function replay() {
+            currentTurn = 1; // on réinitialise le bordel
+            //combi = [0, 0, 0, 0];
+            solution = [];
+
+            for (effaceur = 1; effaceur < 11; effaceur++) { 
+                document.getElementById("gameRow" + effaceur).innerHTML = "";
+                document.getElementById("validBtn" + effaceur).outerHTML = '<td class="resultZone" id="validBtn' + effaceur + '"></td>';
+                document.getElementById("combiZone").innerHTML = "";
+            }
+            
+            console.log("Replay");
+            code(hasard);
+            ballEnabler(currentTurn, combi);
+        }
+
+
+
+        // initialiser la partie
+        code(hasard);
+        document.getElementById("scoreZone").innerHTML = "<strong>Score : " + score + "</strong>";
+        ballEnabler(currentTurn, combi);
+
+
+    </script>
+</body>
+</html>
